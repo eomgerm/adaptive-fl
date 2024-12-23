@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: AdaptiveFLClient
+  rsocket:
+    server:
+      address: 0.0.0.0
+      port: 7001
+      fragment-size: 16777215
+grpc:
+  client:
+    GLOBAL:
+      address: "static://localhost:9090"
+      enable-keep-alive: true
+      keep-alive-without-calls: true
+      negotiation-type: plaintext
+
+  server:
+    port: ${GRPC_PORT}
+
+
+server:
+  port: 8081
+
+adaptivefl:
+  client:
+    id: ${CLIENT_ID}
+    back-pressure:
+      required: true
+      limit-rate: ${LIMIT_RATE}
+    transports:
+      - RSOCKET
+      - GRPC
+    grpc:
+      port: ${GRPC_PORT}

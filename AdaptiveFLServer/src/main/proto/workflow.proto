@@ -1,0 +1,58 @@
+syntax = "proto3";
+import "typing.proto";
+import "google/protobuf/empty.proto";
+
+package adaptivefl.proto;
+
+option java_multiple_files = true;
+option java_package = "com.github.eomgerm.adaptivefl.proto";
+option java_outer_classname = "FlWorkflowProto";
+
+service FlWorkflowService {
+  rpc InitParameters (GetParametersIns) returns (stream GetParametersRes) {}
+
+  rpc RespondInitParameters(stream GetParametersRes) returns (TaskRes) {}
+
+  rpc Fit (stream FitIns) returns (stream FitRes) {}
+
+  rpc RespondFitRes(stream FitRes) returns (TaskRes) {}
+
+  rpc Evaluate(stream EvaluateIns) returns (EvaluateRes) {}
+
+  rpc RespondEvaluateRes(EvaluateRes) returns (TaskRes) {}
+}
+
+message GetParametersIns {}
+
+message GetParametersRes {
+  Status status = 1;
+  Parameters parameters = 2;
+  string client_id = 3;
+}
+
+message FitIns {
+  Parameters parameters = 1;
+}
+
+message FitRes {
+  Status status = 1;
+  Parameters parameters = 2;
+  uint64 num_samples = 3;
+  string client_id = 4;
+}
+
+message EvaluateIns {
+  Parameters parameters = 1;
+}
+
+message EvaluateRes {
+  Status status = 1;
+  double loss = 2;
+  uint64 num_samples = 3;
+  string client_id = 4;
+}
+
+message TaskRes {
+  Status status = 1;
+  string message = 2;
+}

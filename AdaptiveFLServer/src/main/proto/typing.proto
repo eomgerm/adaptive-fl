@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package adaptivefl.proto;
+
+option java_multiple_files = true;
+option java_package = "com.github.eomgerm.adaptivefl.proto";
+option java_outer_classname = "TypingProto";
+
+enum Transport {
+  GRPC = 0;
+  RSOCKET = 1;
+}
+
+enum Status {
+  OK = 0;
+  ERROR = 1;
+  NOOP = 2;
+}
+
+message Parameters {
+  repeated double tensors = 1;
+}

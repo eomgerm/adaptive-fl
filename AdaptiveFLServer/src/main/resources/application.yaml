@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: AdaptiveFLServer
+  rsocket:
+    server:
+      address: 0.0.0.0
+      fragment-size: 16777215
+      port: 7002
+  shell:
+    interactive:
+      enabled: true
+adaptivefl:
+  server:
+    chunk-size: 1000

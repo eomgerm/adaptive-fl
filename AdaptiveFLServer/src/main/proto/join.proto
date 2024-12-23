@@ -1,0 +1,27 @@
+syntax = "proto3";
+import "typing.proto";
+
+package adaptivefl.proto;
+
+option java_multiple_files = true;
+option java_package = "com.github.eomgerm.adaptivefl.proto";
+option java_outer_classname = "ClientJoinProto";
+
+service ClientJoinService {
+  rpc Join (JoinIns) returns (JoinRes) {}
+}
+
+message JoinIns {
+  string client_id = 1;
+  bool back_pressure_required = 2;
+  uint32 limit_rate = 3;
+  repeated Transport transports = 4;
+  string host = 5;
+  uint32 port = 6;
+}
+
+message JoinRes {
+  Status status = 1;
+  uint64 parameters_threshold = 2;
+  uint32 chunk_size = 3;
+}
